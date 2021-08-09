@@ -1,2 +1,3 @@
-# intensivaodepython
-Curso intensivão de python no youtube
+# Curso intensivão de Python
+
+> Curso intensivão de python disponível no youtube
