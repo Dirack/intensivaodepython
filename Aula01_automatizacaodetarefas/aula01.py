@@ -1,3 +1,19 @@
+# coding: utf-8
+#
+# aula01.py (Python)
+# 
+# Objetivo: Aula 01 - Automação de tarefas com Python. Baixar base de dados e enviar relatório por email.
+# 
+# Site: https://dirack.github.io
+# 
+# Versão 1.0
+# 
+# Programador: Rodolfo A C Neves (Dirack) 09/08/2021
+# 
+# Email: rodolfo_profissional@hotmail.com
+# 
+# Licença: GPL-3.0 <https://www.gnu.org/licenses/gpl-3.0.txt>.
+
 import pyautogui as pya
 import pyperclip as pc
 import time
@@ -20,3 +36,36 @@ time.sleep(5)
 
 tabela = pd.read_excel(r'~/Downloads/Vendas - Dez.xlsx')
 print(tabela)
+faturamento = tabela["Valor Final"].sum()
+quantidade = tabela["Quantidade"].sum()
+
+pya.hotkey("Ctrl","t")
+pc.copy("https://mail.google.com/")
+pya.hotkey("Ctrl","v")
+pya.press("enter")
+
+# clicar no botão escrever
+time.sleep(5)
+pya.click(x=177,y=235)
+pya.write("rodolfo_profissional@hotmail.com")
+pya.press("tab") # escolher email
+pya.press("tab") # passar pro campo assunto
+
+# escrever o assunto
+pya.write("Estudo Python")
+pya.press("tab") # passar para o corpo do email
+
+texto = f"""
+Eu quero dizer uma coisa...
+uma coisa!
+E, além do mais, só te digo isso...
+
+faturamento = {faturamento:,.2f}
+quantidade = {quantidade:,.2f}
+
+Att.,
+
+Dirack"""
+
+pya.write(texto)
+pya.hotkey("Ctrl","enter")
